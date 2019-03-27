@@ -25,9 +25,9 @@ module ClerkRails
 
       def current_account
         @clerk_current_account ||= begin
-          if cookies[:clerk_session]
+          if cookies[:clerk_session] || cookies[:__session]
             Clerk::SessionToken.find_account(
-              cookie: cookies[:clerk_session]
+              cookie: cookies[:clerk_session] || cookies[:__session]
             )
           else
             nil
